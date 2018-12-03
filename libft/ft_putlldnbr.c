@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 12:58:45 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/22 12:59:46 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 17:47:17 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/30 16:00:29 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isupper(int c)
+void	ft_putlldnbr(long long n)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	return (0);
+	if (n == LLONG_MIN)
+		ft_putstr("−9223372036854775808");
+	else
+	{
+		if (n < 0)
+		{
+			ft_putchar('-');
+			n = n * -1;
+		}
+		if (n >= 10)
+		{
+			ft_putlldnbr(n / 10);
+			ft_putlldnbr(n % 10);
+		}
+		else
+			ft_putchar('0' + n);
+	}
 }

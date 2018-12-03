@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 16:04:18 by prastoin          #+#    #+#             */
-/*   Updated: 2018/08/08 21:15:36 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 17:47:17 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/30 15:42:22 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_str_is_alpha(char *str)
-{
-	int i;
+#include "libft.h"
 
-	i = 0;
-	while ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' && str[i] <= 'z'))
+void	ft_putlunbr(unsigned long n)
+{
+	if (n >= 10)
 	{
-		i++;
+		ft_putlunbr(n / 10);
+		ft_putlunbr(n % 10);
 	}
-	if (str[i] == '\0')
-		return (1);
-	return (0);
+	else
+		ft_putchar('0' + n);
 }

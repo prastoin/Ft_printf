@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 20:55:42 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/22 13:19:55 by prastoin         ###   ########.fr       */
+/*   Created: 2018/12/03 12:33:08 by prastoin          #+#    #+#             */
+/*   Updated: 2018/12/03 15:08:00 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_str_is_uppercase(char *str)
+#include "ft_printf.h"
+
+void	printpadd(int padd, int len)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (str[i] >= 'A' && str[i] <= 'Z')
+	while (i < (padd - len))
+	{
+		ft_putchar(' ');
 		i++;
-	if (str[i] == '\0')
-		return (1);
-	return (0);
+	}
+}
+
+void	printless(int less, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < (less - len))
+	{
+		ft_putchar(' ');
+		i++;
+	}
 }

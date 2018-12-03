@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 14:52:17 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/13 08:53:32 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 10:57:35 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/09 15:46:11 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	size_t				i;
+	unsigned char		*cpys1;
+	unsigned char		*cpys2;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
 	i = 0;
+	cpys1 = (unsigned char *)s1;
+	cpys2 = (unsigned char *)s2;
 	while (i < n)
 	{
-		if ((str1[i] - str2[i]) != 0)
-			return (str1[i] - str2[i]);
+		if (cpys1[i] != cpys2[i])
+			return ((int)(cpys1[i] - cpys2[i]));
 		i++;
 	}
 	return (0);

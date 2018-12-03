@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 16:54:29 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/11 15:13:17 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 17:47:17 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/30 16:08:08 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrev(char *s1)
+void	ft_putldnbr(long int n)
 {
-	int		i;
-	char	temp;
-	int		len;
-
-	len = ft_strlen(s1);
-	len--;
-	i = 0;
-	while (i < len)
+	if (n == LONG_MIN)
+		ft_putstr("-9223372036854775808");
+	else
 	{
-		temp = s1[i];
-		s1[i] = s1[len];
-		s1[len] = temp;
-		i++;
-		len--;
+		if (n < 0)
+		{
+			ft_putchar('-');
+			n = n * -1;
+		}
+		if (n >= 10)
+		{
+			ft_putldnbr(n / 10);
+			ft_putldnbr(n % 10);
+		}
+		else
+			ft_putchar('0' + n);
 	}
-	return (s1);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerrouc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 14:50:48 by amerrouc          #+#    #+#             */
-/*   Updated: 2018/11/14 15:25:27 by amerrouc         ###   ########.fr       */
+/*   Created: 2018/11/07 17:27:20 by ochaar            #+#    #+#             */
+/*   Updated: 2018/12/03 13:18:59 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_power(int nb, int power)
-{
-	int	nb_pwr;
+#include <unistd.h>
+#include "libft.h"
 
-	nb_pwr = nb;
-	if (power < 0)
-		return (0);
-	if (power == 0)
-		return (1);
-	if (power == 1)
-		return (nb_pwr);
-	nb_pwr = nb * ft_power(nb, power - 1);
-	return (nb_pwr);
+void	ft_putnstr(char const *s, int n)
+{
+	int i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i] && i < n)
+	{
+		ft_putchar(s[i]);
+		i++;
+	}
 }

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_lowercase.c                              :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 16:41:26 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/14 15:10:42 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 17:47:17 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/30 15:36:51 by fbecerri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_str_is_lowercase(char *str)
-{
-	int i;
+#include "libft.h"
 
-	i = 0;
-	while (str[i] >= 'a' && str[i] <= 'z')
-		i++;
-	if (str[i] == '\0')
-		return (1);
-	return (0);
+void	ft_putllunbr(long long unsigned n)
+{
+	if (n >= 10)
+	{
+		ft_putllunbr(n / 10);
+		ft_putllunbr(n % 10);
+	}
+	else
+		ft_putchar('0' + n);
 }

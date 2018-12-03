@@ -1,80 +1,74 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 14:37:48 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/13 09:12:42 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 17:25:21 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/13 11:51:00 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*cnvchar(char *list, char c, int *i)
+static int	ft_length(int nb)
 {
-	list[*i] = c;
-	*i = *i + 1;
-	return (list);
-}
+	int	i;
 
-static char		*putnbr(int n, char *list, int *i)
-{
-	long	nb;
-	int		neg;
-
-	nb = n;
-	neg = 0;
+	i = 1;
 	if (nb < 0)
 	{
-		nb = -nb;
-		cnvchar(list, '-', i);
+		nb = nb * -1;
+		i++;
 	}
-	if (nb > 9)
+	while (nb >= 10)
 	{
-		putnbr(nb / 10, list, i);
-		putnbr(nb % 10, list, i);
+		nb = nb / 10;
+		i++;
+	}
+	return (i);
+}
+
+static char	*ft_stock(char *str, int nbr, int len)
+{
+	int		i;
+
+	str[len] = '\0';
+	len = len - 1;
+	if (nbr < 0)
+	{
+		nbr = nbr * -1;
+		i = 1;
+		str[0] = '-';
 	}
 	else
-		cnvchar(list, (nb + '0'), i);
-	return (list);
+		i = 0;
+	while (len >= i)
+	{
+		str[len] = nbr % 10 + '0';
+		nbr = nbr / 10;
+		len--;
+	}
+	return (str);
 }
 
-static char		*malloclist(char *list, int diz, int n)
+char		*ft_itoa(int n)
 {
-	int		i;
-	int		neg;
+	int		len;
+	int		over;
+	char	*str;
 
-	neg = 1;
-	i = 0;
-	if (n < 0)
+	over = 0;
+	if (n == -2147483648)
 	{
-		neg = 2;
-		n = -n;
+		n = -2147483647;
+		over = 1;
 	}
-	while (n > 0)
-	{
-		n = n / 10;
-		diz++;
-	}
-	if (!(list = (char *)malloc(sizeof(char) * (diz + neg))))
+	len = ft_length(n);
+	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
 		return (NULL);
-	list[diz + neg - 1] = '\0';
-	return (list);
-}
-
-char			*ft_itoa(int n)
-{
-	int		i;
-	char	*list;
-	int		diz;
-
-	diz = 0;
-	i = 0;
-	list = NULL;
-	if ((list = malloclist(list, diz, n)) == NULL)
-		return (NULL);
-	list = putnbr(n, list, &i);
-	return (list);
+	str = ft_stock(str, n, len);
+	str[len - 1] += over;
+	return (str);
 }

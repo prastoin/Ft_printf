@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 11:45:11 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/14 13:40:25 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/12 14:06:50 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/12 14:07:56 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_iterative_factorial(int nb)
+void	ft_swap(int *a, int *b)
 {
-	int i;
-	int res;
+	int temp;
 
-	res = nb;
-	i = 2;
-	if (nb < 0)
-		return (0);
-	if (nb == 0 || nb == 1)
-		return (1);
-	while (i != nb)
-	{
-		res = res * i;
-		i++;
-	}
-	return (res);
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }

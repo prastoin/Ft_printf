@@ -3,105 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/19 13:22:56 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/22 16:43:17 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/15 09:53:19 by fbecerri          #+#    #+#             */
+/*   Updated: 2018/11/23 18:12:24 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strndup(const char *s1, size_t n)
+char	*ft_strndup(const char *str, size_t n)
 {
-	char	*dst;
-	size_t	i;
+	unsigned int	i;
+	char			*dst;
 
-	i = 0;
-	if (!(dst = (char *)malloc(sizeof(char) * (n + 1))))
+	if (!(dst = (char*)malloc(sizeof(char) * (n + 1))))
 		return (NULL);
-	while (s1[i] && i < n)
+	i = 0;
+	while (str[i] && i < n)
 	{
-		dst[i] = s1[i];
+		dst[i] = str[i];
 		i++;
 	}
 	dst[i] = '\0';
 	return (dst);
 }
 
-static char	*ft_line(char **lus)
+char	*ft_reader(char **str, char *buff, int fd)
 {
-	char	*occ;
 	char	*tmp;
-	char	*line;
+	int		ret;
 
-	occ = ft_strchr(*lus, '\n');
-	tmp = NULL;
-	if (occ != NULL)
+	ret = 1;
+	while (!(ft_strchr(*str, '\n')) && ret != 0)
 	{
-		if (!(line = ft_strndup(*lus, occ - *lus)))
+		ret = read(fd, buff, BUFF_SIZE);
+		if (ret == -1)
 			return (NULL);
-		tmp = *lus;
-		if (!(*lus = ft_strdup(occ + 1)))
+		if (ret)
+		{
+			buff[ret] = '\0';
+			tmp = *str;
+			if (!(*str = ft_strjoin(*str, buff)))
+				return (NULL);
+			free(tmp);
+		}
+	}
+	free(buff);
+	return (*str);
+}
+
+char	*ft_line(char **str)
+{
+	char		*buff;
+	char		*line;
+	char		*tmp;
+
+	buff = ft_strchr(*str, '\n');
+	tmp = NULL;
+	if (buff)
+	{
+		if (!(line = ft_strndup(*str, buff - *str)))
+			return (NULL);
+		tmp = *str;
+		if (!(*str = ft_strdup(buff + 1)))
 			return (NULL);
 		free(tmp);
 	}
-	else if (!(line = ft_strdup(*lus)))
+	else if (!(line = ft_strdup(*str)))
 		return (NULL);
-	if (!((*lus) && tmp))
+	if (!((*str) && tmp))
 	{
-		free(*lus);
-		*lus = NULL;
+		free(*str);
+		*str = NULL;
 	}
 	return (line);
 }
 
-static char	*reading(int fd, char **lus, char *buf)
+int		get_next_line(const int fd, char **line)
 {
-	ssize_t	ret;
-	char	*tmp;
+	static char		*str;
+	char			*buff;
 
-	ret = 1;
-	tmp = NULL;
-	while ((ft_strchr(*lus, '\n') == NULL) && ret > 0)
+	if (!str)
+		str = NULL;
+	if (fd < 0 || !line || BUFF_SIZE <= 0 || !(buff = ft_strnew(BUFF_SIZE + 1))
+		|| (!str && !(str = ft_strnew(0))))
+		return (-1);
+	if (!(ft_reader(&str, buff, fd)))
+		return (-1);
+	if (*str)
 	{
-		ret = read(fd, buf, BUFF_SIZE);
-		if (ret == -1)
-		{
-			free(buf);
-			return (NULL);
-		}
-		if (ret > 0)
-		{
-			tmp = *lus;
-			buf[ret] = '\0';
-			if (!(*lus = ft_strjoin(*lus, buf)))
-				return (NULL);
-			free(tmp);
-			tmp = NULL;
-		}
-	}
-	free(buf);
-	return (*lus);
-}
-
-int			get_next_line(const int fd, char **line)
-{
-	static char	*lus[OPEN_MAX];
-	char		*buf;
-
-	if ((fd < 0) || (BUFF_SIZE <= 0) || (fd >= OPEN_MAX))
-		return (-1);
-	if (!(buf = ft_strnew(BUFF_SIZE + 1)))
-		return (-1);
-	if (!(lus[fd]))
-		if (!(lus[fd] = ft_strnew(0)))
-			return (-1);
-	if (!(reading(fd, lus + fd, buf)))
-		return (-1);
-	if (*(lus[fd]))
-	{
-		if (!(*line = ft_line(lus + fd)))
+		if (!(*line = ft_line(&str)))
 			return (-1);
 		return (1);
 	}

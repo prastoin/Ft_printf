@@ -3,67 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 16:34:50 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/13 09:11:16 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 15:56:39 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/11 16:48:25 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_nbrspace(char *s)
+static int	ft_last_index(char const *s, int i)
 {
-	size_t	i;
-	size_t	deb;
+	int n;
 
-	i = 0;
-	deb = 0;
-	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+	n = 0;
+	while (s[i])
 	{
 		i++;
-		deb++;
+		n++;
 	}
-	return (deb);
-}
-
-static char		*filltab(char *s, size_t deb, int fin)
-{
-	char	*fresh;
-	size_t	i;
-
-	i = 0;
-	if (!(fresh = malloc(sizeof(char) * (fin - deb + 1))))
-		return (0);
-	while (i < (fin - deb))
+	i = i - 1;
+	if (n > 0)
 	{
-		fresh[i] = s[deb + i];
-		i++;
+		while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		{
+			i--;
+			n--;
+		}
 	}
-	fresh[i] = '\0';
-	return (fresh);
+	return (n);
 }
 
-char			*ft_strtrim(const char *s)
+char		*ft_strtrim(char const *s)
 {
-	size_t	deb;
-	size_t	fin;
+	int		i;
+	int		j;
+	int		len;
 	char	*str;
 
-	if (!(s))
+	i = 0;
+	j = 0;
+	if (!s)
 		return (NULL);
-	if (!(str = ft_strdup(s)))
-		return (0);
-	deb = ft_nbrspace(str);
-	if (deb == ft_strlen(str))
+	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		i++;
+	len = ft_last_index(s, i);
+	i = 0;
+	if (!(str = (char*)malloc(sizeof(*str) * (len + 1))))
+		return (NULL);
+	while (s[j] == ' ' || s[j] == '\t' || s[j] == '\n')
+		j++;
+	while (i < len)
 	{
-		str[0] = '\0';
-		return (str);
+		str[i] = s[j + i];
+		i++;
 	}
-	ft_strrev(str);
-	fin = ft_strlen(s) - ft_nbrspace(str);
-	ft_strrev(str);
-	if (!(str = filltab(str, deb, fin)))
-		return (0);
+	str[i] = '\0';
 	return (str);
 }

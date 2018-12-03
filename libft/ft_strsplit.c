@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 10:54:47 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/14 15:42:33 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 17:25:13 by ochaar            #+#    #+#             */
+/*   Updated: 2018/11/11 16:42:56 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	ft_countwords(char *s, char c)
 {
-	int	i;
-	int	count_words;
-	int	is_words;
+	int		i;
+	int		count_words;
+	int		is_words;
 
 	i = 0;
 	count_words = 0;
@@ -37,7 +37,7 @@ static int	ft_countwords(char *s, char c)
 
 static int	ft_len_words(char *s, int c, int k)
 {
-	int	len;
+	int		len;
 
 	len = 0;
 	while (s[k] != c && s[k])

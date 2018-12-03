@@ -3,34 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 15:14:11 by prastoin          #+#    #+#             */
-/*   Updated: 2018/11/13 10:46:36 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/06 19:28:34 by ochaar            #+#    #+#             */
+/*   Updated: 2018/12/03 11:02:11 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 int		ft_atoi(const char *str)
 {
-	long res;
-	long neg;
-	long i;
+	int			i;
+	int			negativ;
+	long long	result;
 
 	i = 0;
-	neg = 1;
-	res = 0;
-	while (str[i] == ' ' || (str[i] >= '\a' && str[i] <= '\r'))
+	negativ = 1;
+	result = 0;
+	while ((str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r')) && str[i])
 		i++;
 	if (str[i] == '-')
-		neg = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
 	{
-		res = res * 10 + (str[i] - '0');
+		negativ = -1;
 		i++;
 	}
-	return ((int)(res * neg));
+	else if (str[i] == '+')
+		i++;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+		if (result < 0)
+			return ((negativ == 1) ? -1 : 0);
+	}
+	return ((int)result * negativ);
 }
