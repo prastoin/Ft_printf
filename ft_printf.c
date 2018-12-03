@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 11:31:25 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/03 15:22:56 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/03 15:35:57 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-/*int		ft_print(const char *str, int i)
+int		ft_print(const char *str, int i)
 {
 	while (str[i] && str[i] != '%')
 	{
@@ -29,7 +29,7 @@ t_args	ft_longtype(const char *c, t_args args)
 	args.decal = 1;
 	args.type[args.args] = 4;
 
-	args.type[args.args] += c[1] == 'u' ? 1 : 0;
+	args.type[args.s] += c[1] == 'u' ? 1 : 0;
 	args.decal += c[1] == 'u' ? 1 : 0;
 
 	args.type[args.args] += c[1] == 'l' && c[2] == 'u' ? 2 : 0;
@@ -78,7 +78,7 @@ t_args	ft_type(const char *c, t_args args)
 	if (c[0] == 'l')
 		args = ft_longtype(c, args);
 	return (args);
-}*/
+}
 
 int		ft_pass(char *str, t_args args, va_list ap)
 {
@@ -114,8 +114,8 @@ int ft_printf(const char *format, ...)
 			args.args++;
 			i += ft_strlen(args.str) - 1;
 		}
-//		else
-//			i = ft_print(format, i);
+		else
+			i = ft_print(format, i);
 		i++;
 	}
 	return (0);
@@ -123,7 +123,7 @@ int ft_printf(const char *format, ...)
 
 int main(void)
 {
-	printf("%s\n", "ok c'est cool");
-	ft_printf("%s", "ok c'est cool");
+//	printf("%s\n", "ok c'est cool");
+	ft_printf("%s on essaie le enotre avec un backslash n\n", "ok c'est cool");
 	return 0;
 }
