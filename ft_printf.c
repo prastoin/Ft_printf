@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 11:31:25 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/03 15:51:00 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/03 17:43:51 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int		ft_pass(char *str, t_args args, va_list ap)
 {
 	args = common(str, args);
 //	printf("%d et %d et %c", args.padd, args.less, args.flag);
-//	if (args.flag == 'd' || args.flag == 'i' || args.flag == 'o' || args.flag == 'u' || args.flag == 'x' || args.flag == 'X')
-//		diouxx(str, args, ap);
+	if (args.flag == 'd' || args.flag == 'i' || args.flag == 'o' || args.flag == 'u' || args.flag == 'x' || args.flag == 'X')
+		diouxx(str, args, ap);
 	if (args.flag == 'c' || args.flag == 's' || args.flag == 'p' )
 		csp(str, args, ap);
 //	if (args.flag == 'f')
@@ -124,6 +124,6 @@ int ft_printf(const char *format, ...)
 int main(void)
 {
 //	printf("%s\n", "ok c'est cool");
-	ft_printf("%s on essaie le enotre avec un backslash n\n", "ok c'est cool");
+	ft_printf("%10.8d\n", -10);
 	return 0;
 }

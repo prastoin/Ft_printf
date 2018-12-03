@@ -6,13 +6,13 @@
 #    By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 15:24:29 by ochaar            #+#    #+#              #
-#    Updated: 2018/12/03 15:50:30 by prastoin         ###   ########.fr        #
+#    Updated: 2018/12/03 17:37:03 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_printf
 
-SRCS = ft_printf.c solver.c padding.c display.c
+SRCS = ft_printf.c solver.c padding.c display.c diouxx.c ft_putnnbr.c
 
 OBJ = $(SRCS:.c=.o)
 

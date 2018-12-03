@@ -6,7 +6,7 @@
 /*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:57:18 by ochaar            #+#    #+#             */
-/*   Updated: 2018/12/03 15:49:46 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/03 17:39:02 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ int					ft_sqrt(int n);
 
 void				itoa_hexa(unsigned long nbr);
 void				ft_put_octo(long n);
-unsigned long		ft_power(unsigned long nbr, unsigned long power);
+unsigned long long		ft_power(unsigned long nbr, unsigned long power);
 
 #endif

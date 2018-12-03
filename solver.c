@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 10:34:28 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/03 15:23:26 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/03 17:42:07 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_args		common(char *str, t_args args)
 			if (preci == 0 && less == 0)
 			{
 				args.padd = ft_atoi(count);
-				printf("%d\n", args.padd);
 				j = 0;
 			}
 			if (preci != 0 && less == 0)
@@ -65,6 +64,43 @@ t_args		common(char *str, t_args args)
 		i++;
 	}
 	return (args);
+}
+
+int		ft_flags(char *str)
+{
+	int	i;
+	int	len;
+	int flag;
+
+	flag = 0;
+	len = ft_strlen(str);
+	i = 0;
+	flag += str[len - 1] == 'l' ? 1 : 0;
+	flag += str[len - 2] == 'l' && str[len - 1] == 'l' ? 1 : 0;
+	flag += str[len - 1] == 'h' ? 3 : 0;
+	flag += str[len - 2] == 'h' && str[len - 1] == 'h' ? 1 : 0;
+	return (flag);
+}
+
+int		diouxx(char *str, t_args args, va_list ap)
+{
+	int i;
+	int	flag;
+
+	i = 0;
+	flag = ft_flags(str);
+	if (args.flag == 'd')
+		ft_d(str, args, ap, flag);
+/*	if (args.flag == 'i')
+		
+	if (args.flag == 'o')
+
+	if (args.flag == 'u')
+
+	if (args.flag == 'x')
+
+	if (args.flag == 'X')*/
+	return (0);
 }
 
 int		csp(char *str, t_args args, va_list ap)

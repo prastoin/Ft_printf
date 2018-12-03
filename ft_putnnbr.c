@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_power.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 17:38:22 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/03 17:38:42 by prastoin         ###   ########.fr       */
+/*   Created: 2018/11/07 17:47:17 by ochaar            #+#    #+#             */
+/*   Updated: 2018/12/03 17:35:51 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned long long	ft_power(unsigned long nbr, unsigned long pow)
-{
-	unsigned long long i;
-	unsigned long long tmp;
+#include "ft_printf.h"
 
-	i = 1;
-	tmp = nbr;
-	if (pow == 0)
-		return (1);
-	while (i < pow)
+void	ft_putnnbr(unsigned long long n)
+{
+	
+	if (n > 9)
 	{
-		nbr = nbr * tmp;
-		i++;
+		ft_putnnbr(n / 10);
+		ft_putnnbr(n % 10);
 	}
-	return (nbr);
+	else
+		ft_putchar('0' + n);
 }

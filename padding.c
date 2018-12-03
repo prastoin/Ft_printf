@@ -6,21 +6,11 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 09:48:49 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/03 15:31:17 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:48:31 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/*int		ft_count(int nb)
-{
-	int i;
-
-	i = 0;
-	while (i / 10 > 0)
-		i++;
-	return (i);
-}*/
 
 t_args		getarg(const char *fmt, t_args args)
 {
