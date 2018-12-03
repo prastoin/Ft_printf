@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 11:31:25 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/03 15:35:57 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/03 15:51:00 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_print(const char *str, int i)
 	return (i - 1);
 }
 
-t_args	ft_longtype(const char *c, t_args args)
+/*t_args	ft_longtype(const char *c, t_args args)
 {
 	args.decal = 1;
 	args.type[args.args] = 4;
@@ -78,7 +78,7 @@ t_args	ft_type(const char *c, t_args args)
 	if (c[0] == 'l')
 		args = ft_longtype(c, args);
 	return (args);
-}
+}*/
 
 int		ft_pass(char *str, t_args args, va_list ap)
 {
