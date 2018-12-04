@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 10:34:28 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/03 17:42:07 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 12:07:51 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,18 @@ int		csp(char *str, t_args args, va_list ap)
 		if (args.less != 0)
 			printless(args.less, len);
 	}
-/*	if (args.flag == 'p')
+	if (args.flag == 'p')
 	{
+		tmp = ft_printptr(va_arg(ap, void *));
+		len = strlen(tmp) + 2;
 		if (args.padd != 0 && args.padd > len)
 			printpadd(args.padd, len);
-		tmp = (va_arg(ap, char*));
-		ft_putstr(&tmp);
-		if ()
-	}*/
+		ft_putstr("0x");
+		ft_putstr(tmp);
+		if (args.less != 0)
+			printless(args.less, len);
+		free (tmp);
+	}
 	if (args.flag == 's')
 	{
 		tmp = va_arg(ap, char*);

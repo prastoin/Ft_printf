@@ -6,7 +6,7 @@
 /*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:57:18 by ochaar            #+#    #+#             */
-/*   Updated: 2018/12/03 17:39:02 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 11:52:46 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_swap(int *a, int *b);
 int					ft_sqrt(int n);
 
-void				itoa_hexa(unsigned long nbr);
+char *				itoa_hexa(unsigned long nbr);
 void				ft_put_octo(long n);
 unsigned long long		ft_power(unsigned long nbr, unsigned long power);
 

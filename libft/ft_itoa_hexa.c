@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 15:46:19 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/03 15:48:58 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 12:01:45 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	ft_convbase(char *str, unsigned long i, unsigned long nbr)
 	}
 }
 
-void	itoa_hexa(unsigned long nbr)
+char*	itoa_hexa(unsigned long nbr)
 {
-	char			str[30];
+	char			*str;
 	unsigned long	i;
 	unsigned long	a;
 
@@ -47,7 +47,8 @@ void	itoa_hexa(unsigned long nbr)
 	while (ft_power(16, i) <= a)
 		i++;
 	i += nbr == 0 ? 1 : 0;
+	if (!((str = (char *)malloc(sizeof(char) * i + 1))))
+			return (NULL);
 	ft_convbase(str, i, nbr);
-	write(1, "0x", 2);
-	ft_putstr(str);
+	return (str);
 }

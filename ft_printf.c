@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 11:31:25 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/03 18:20:57 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 12:05:33 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int ft_printf(const char *format, ...)
 int main(void)
 {
 //	printf("%s\n", "ok c'est cool");
-	ft_printf("%+10.3d\n", 10);
+	ft_printf("%-20p\n", "HELLO");
+	printf("%-20p\n", "HELLO");
 	return 0;
 }
