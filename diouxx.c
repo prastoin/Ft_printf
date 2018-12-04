@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 16:29:12 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/04 13:43:53 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 14:32:10 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,31 @@ static int		checksp(char *str)
 	return (0);
 }
 
+static int		check0(char *str)
+{
+	int count;
+	int i;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] >= '1' && str[i] <= '9')
+			break;
+		if (str[i] == '0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void		ft_d(char *str, t_args args, va_list ap, int flag)
 {
 	int					len;
 	long long			nbr;
 	int					neg;
 	unsigned long long	n;
+	int					curr;
 
 	len = 0;
 	nbr = ft_dcut(0, flag, ap);
@@ -73,10 +92,11 @@ void		ft_d(char *str, t_args args, va_list ap, int flag)
 		len++;
 	checkplus(str) == 1  && neg == 0 ? ft_putchar('+') : 0;
 	checksp(str) == 1  && neg == 0 && checkplus(str) != 1 ? ft_putchar(' ') : 0;
-	len += checkplus(str) == 1 || checksp(str) == 1;
-	args.preci = args.preci > len ? args.preci : len;
-	if (args.padd != 0 && args.padd > args.preci)
-		printpadd(args.padd, args.preci + neg);
+	curr = args.preci > len ? args.preci : len;
+	if (args.padd != 0 && args.padd > curr)
+		printpadd0(args.padd, curr + neg + (checkplus(str) == 1 || 
+					checksp(str) == 1 ? 1 : 0), (check0(str) == 1 && 
+					args.preci == 0 && args.less == 0) ? '0' : ' ');
 	if (neg == 1)
 		ft_putchar('-');
 	while (args.preci > len)

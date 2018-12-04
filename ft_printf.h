@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 12:45:36 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/04 13:37:12 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 14:11:28 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		csp(char *str, t_args args, va_list ap);
 int		flotte(char *str, t_args args, va_list ap);
 int		diouxx(char *str, t_args args, va_list ap);
 
+void	printpadd0(int padd, int len, char c);
 char	*ft_printptr(void * ptr);
 void	ft_putnnbr(unsigned long long n);
 void	printpadd(int padd, int len);
