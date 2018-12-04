@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 12:45:36 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/04 11:59:46 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 12:43:03 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_args		getarg(const char *fmt, t_args args);
 
 t_args		common(char *str, t_args args);
 
+void	ft_u(char *str, t_args args, va_list ap, int flag);
 void	ft_d(char *str, t_args args, va_list ap, int flag);
 int		csp(char *str, t_args args, va_list ap);
 int		flotte(char *str, t_args args, va_list ap);

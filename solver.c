@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 10:34:28 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/04 12:07:51 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 12:43:40 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,15 @@ int		diouxx(char *str, t_args args, va_list ap)
 
 	i = 0;
 	flag = ft_flags(str);
-	if (args.flag == 'd')
+	if (args.flag == 'd' || args.flag == 'i')
 		ft_d(str, args, ap, flag);
 /*	if (args.flag == 'i')
 		
 	if (args.flag == 'o')
-
+*/
 	if (args.flag == 'u')
-
-	if (args.flag == 'x')
+	ft_u(str, args, ap, flag);
+/*	if (args.flag == 'x')
 
 	if (args.flag == 'X')*/
 	return (0);
