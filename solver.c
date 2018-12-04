@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 10:34:28 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/04 12:43:40 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 13:25:28 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_args		common(char *str, t_args args)
 				args.padd = ft_atoi(count);
 				j = 0;
 			}
-			if (preci != 0 && less == 0)
+			if (preci != 0)
 			{
 				args.preci = ft_atoi(count);
 				preci = 0;

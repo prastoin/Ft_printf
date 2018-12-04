@@ -6,7 +6,7 @@
 #    By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 15:24:29 by ochaar            #+#    #+#              #
-#    Updated: 2018/12/04 11:45:46 by prastoin         ###   ########.fr        #
+#    Updated: 2018/12/04 13:17:26 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C ./libft
-	gcc $(FLAGS) -c $(SRCS)
-	gcc $(FLAGS) $(OBJ) -o $(NAME) -Llibft -lft -I libft
+	gcc  -c $(SRCS)
+	gcc  $(OBJ) -o $(NAME) -Llibft -lft -I libft
 
 clean:
 	/bin/rm -rf $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 16:29:12 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/04 12:49:52 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 13:43:53 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,34 @@ static int	ft_dcut(int nbr, int flag, va_list ap)
 	return (nbr);
 }
 
+static int		checkplus(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '+')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int		checksp(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void		ft_d(char *str, t_args args, va_list ap, int flag)
 {
 	int					len;
@@ -43,14 +71,14 @@ void		ft_d(char *str, t_args args, va_list ap, int flag)
 	n = nbr < 0 ? -nbr : nbr;
 	while (ft_power(10, len) <= n)
 		len++;
-	args.preci += str[1] == '+' && neg == 0 ? 1 : 0;
+	checkplus(str) == 1  && neg == 0 ? ft_putchar('+') : 0;
+	checksp(str) == 1  && neg == 0 && checkplus(str) != 1 ? ft_putchar(' ') : 0;
+	len += checkplus(str) == 1 || checksp(str) == 1;
 	args.preci = args.preci > len ? args.preci : len;
 	if (args.padd != 0 && args.padd > args.preci)
 		printpadd(args.padd, args.preci + neg);
 	if (neg == 1)
 		ft_putchar('-');
-	len += str[1] == '+' && neg == 0 ? 1 : 0;
-	str[1] == '+' && neg == 0 ? ft_putchar('+') : 0;
 	while (args.preci > len)
 	{
 		ft_putchar('0');
@@ -84,16 +112,14 @@ void		ft_u(char *str, t_args args, va_list ap, int flag)
 	int					len;
 	unsigned long long			nbr;
 
+	(void)str;
 	len = 0;
 	nbr = ft_ucut(0, flag, ap);
 	while (ft_power(10, len) <= nbr)
 		len++;
-	args.preci += str[1] == '+' ? 1 : 0;
 	args.preci = args.preci > len ? args.preci : len;
 	if (args.padd != 0 && args.padd > args.preci)
 		printpadd(args.padd, args.preci);
-	len += str[1] == '+' ? 1 : 0;
-	str[1] == '+' ? ft_putchar('+') : 0;
 	while (args.preci > len)
 	{
 		ft_putchar('0');

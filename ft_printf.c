@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 11:31:25 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/04 12:48:41 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 13:59:22 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_args	ft_type(const char *c, t_args args)
 int		ft_pass(char *str, t_args args, va_list ap)
 {
 	args = common(str, args);
-//	printf("%d et %d et %c", args.padd, args.less, args.flag);
+//	printf("padd %d et less %d et preci %d et %c", args.padd, args.less, args.preci, args.flag);
 	if (args.flag == 'd' || args.flag == 'i' || args.flag == 'o' || args.flag == 'u' || args.flag == 'x' || args.flag == 'X')
 		diouxx(str, args, ap);
 	if (args.flag == 'c' || args.flag == 's' || args.flag == 'p' )
@@ -109,6 +109,7 @@ int ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			args = getarg(format, args);
+			printf("%s\n", args.str);
 			ft_pass(args.str, args, ap);
 //			ft_impr(ap, args);
 			args.args++;
@@ -124,7 +125,7 @@ int ft_printf(const char *format, ...)
 int main(void)
 {
 //	printf("%s\n", "ok c'est cool");
-	ft_printf("%u\n", 5451);
-	printf("%u\n", 5451);
+	ft_printf("%1        014.d\n", 5451);
+	printf("%1           014.d\n", 5451);
 	return 0;
 }

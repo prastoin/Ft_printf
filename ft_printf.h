@@ -6,7 +6,7 @@
 /*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 12:45:36 by fbecerri          #+#    #+#             */
-/*   Updated: 2018/12/04 12:43:03 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/04 13:37:12 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ typedef struct	s_struct
 	int		preci;
 	int		less;
 }				t_args;
+
+/*typedef struct s_darg
+{
+	int		
+}*/
 
 t_args		getarg(const char *fmt, t_args args);
 
