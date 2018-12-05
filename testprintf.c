@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   testprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 13:21:40 by ochaar            #+#    #+#             */
-/*   Updated: 2018/11/09 10:01:03 by ochaar           ###   ########.fr       */
+/*   Created: 2018/12/04 15:17:53 by prastoin          #+#    #+#             */
+/*   Updated: 2018/12/05 18:14:12 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memalloc(size_t size)
+int main(int argc, const char *argv[])
 {
-	void	*mem;
-
-	if (!(mem = (void *)malloc(size)))
-		return (NULL);
-	ft_bzero(mem, size);
-	return (mem);
+	int i;
+	int b;
+	ft_printf("{%05.s}\n", 0);
+	printf("{%05.s}", 0);
+	return 0;
 }

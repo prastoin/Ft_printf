@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 19:44:35 by ochaar            #+#    #+#             */
-/*   Updated: 2018/11/06 19:45:40 by ochaar           ###   ########.fr       */
+/*   Created: 2018/11/07 17:25:31 by ochaar            #+#    #+#             */
+/*   Updated: 2018/12/05 09:32:36 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+#include "ft_printf.h"
+
+int		ft_putchar(char c, t_args *args)
 {
-	if (c < 32 || c > 126)
-		return (0);
-	return (1);
+	write (1, &c, 1);
+	args->count++;
+	return (args->count);
 }

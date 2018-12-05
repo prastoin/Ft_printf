@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 17:35:48 by ochaar            #+#    #+#             */
-/*   Updated: 2018/11/09 20:52:48 by ochaar           ###   ########.fr       */
+/*   Created: 2018/12/03 17:38:22 by prastoin          #+#    #+#             */
+/*   Updated: 2018/12/05 11:26:10 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+unsigned long long	ft_power(unsigned long long nbr, unsigned long long pow)
 {
-	if (lst == NULL || !f)
-		return ;
-	while (lst)
+	unsigned long long i;
+	unsigned long long tmp;
+
+	i = 1;
+	tmp = nbr;
+	if (pow == 0)
+		return (1);
+	while (i < pow)
 	{
-		f(lst);
-		lst = lst->next;
+		nbr = nbr * tmp;
+		i++;
 	}
+	return (nbr);
 }

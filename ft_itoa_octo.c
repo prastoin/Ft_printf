@@ -1,54 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_hexa.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_octo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 15:46:19 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/04 12:01:45 by prastoin         ###   ########.fr       */
+/*   Created: 2018/12/03 15:43:33 by prastoin          #+#    #+#             */
+/*   Updated: 2018/12/05 16:22:25 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_convbase(char *str, unsigned long i, unsigned long nbr)
+static void ft_convbase(char *str, long i, unsigned long nbr)
 {
 	unsigned long a;
 	unsigned long tmp;
 
 	a = 0;
-	str[i] = '\0';
-	while (i > 0)
+	str[i + 1] = '\0';
+	while (i >= 0)
 	{
 		tmp = 0;
-		while (nbr >= ft_power(16, i - 1))
+		while (nbr >= ft_power(8, i))
 		{
 			tmp++;
-			nbr = nbr - ft_power(16, i - 1);
+			nbr = nbr - ft_power(8, i);
 		}
-		if (tmp <= 9)
-			str[a] = tmp + '0';
-		else
-			str[a] = tmp - 10 + 'a';
+		str[a] = tmp + '0';
 		a++;
 		i--;
 	}
 }
 
-char*	itoa_hexa(unsigned long nbr)
+char	*ft_itoa_octo(unsigned long long nbr)
 {
-	char			*str;
-	unsigned long	i;
-	unsigned long	a;
+	char				*str;
+	long long			i;
+	unsigned long long	a;
 
 	a = nbr;
 	i = 0;
-	while (ft_power(16, i) <= a)
+	while (a / 8 > 0)
+	{
 		i++;
+		a = a / 8;
+	}
 	i += nbr == 0 ? 1 : 0;
 	if (!((str = (char *)malloc(sizeof(char) * i + 1))))
-			return (NULL);
+		return (NULL);
+	i -= nbr == 0 ? 1 : 0;
 	ft_convbase(str, i, nbr);
 	return (str);
 }

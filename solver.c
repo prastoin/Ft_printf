@@ -6,13 +6,13 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 10:34:28 by prastoin          #+#    #+#             */
-/*   Updated: 2018/12/04 13:25:28 by prastoin         ###   ########.fr       */
+/*   Updated: 2018/12/05 18:15:40 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_args		common(char *str, t_args args)
+void	common(char *str, t_args *args)
 {
 	int		i;
 	char	count[10];
@@ -23,7 +23,7 @@ t_args		common(char *str, t_args args)
 	less = 0;
 	preci = 0;
 	j = 0;
-	i = 1;
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '.')
@@ -45,25 +45,24 @@ t_args		common(char *str, t_args args)
 			count[j] = '\0';
 			if (preci == 0 && less == 0)
 			{
-				args.padd = ft_atoi(count);
+				args->padd = ft_atoi(count);
 				j = 0;
 			}
 			if (preci != 0)
 			{
-				args.preci = ft_atoi(count);
+				args->preci = ft_atoi(count);
 				preci = 0;
 				j = 0;
 			}
 			if (preci == 0 && less != 0)
 			{
-				args.less = ft_atoi(count);
+				args->less = ft_atoi(count);
 				less = 0;
 				j = 0;
 			}
 		}
 		i++;
 	}
-	return (args);
 }
 
 int		ft_flags(char *str)
@@ -73,7 +72,7 @@ int		ft_flags(char *str)
 	int flag;
 
 	flag = 0;
-	len = ft_strlen(str);
+	len = ft_strlen(str) - 1;
 	i = 0;
 	flag += str[len - 1] == 'l' ? 1 : 0;
 	flag += str[len - 2] == 'l' && str[len - 1] == 'l' ? 1 : 0;
@@ -82,28 +81,25 @@ int		ft_flags(char *str)
 	return (flag);
 }
 
-int		diouxx(char *str, t_args args, va_list ap)
+int		diouxx(char *str, t_args *args, va_list ap)
 {
 	int i;
 	int	flag;
 
 	i = 0;
 	flag = ft_flags(str);
-	if (args.flag == 'd' || args.flag == 'i')
+	if (args->flag == 'd' || args->flag == 'i')
 		ft_d(str, args, ap, flag);
-/*	if (args.flag == 'i')
-		
-	if (args.flag == 'o')
-*/
-	if (args.flag == 'u')
-	ft_u(str, args, ap, flag);
-/*	if (args.flag == 'x')
-
-	if (args.flag == 'X')*/
+	if (args->flag == 'o')
+		ft_o(str, args, ap, flag);
+	if (args->flag == 'x' || args->flag == 'X')
+		ft_xX(str, args, ap, flag);
+	if (args->flag == 'u')
+		ft_u(str, args, ap, flag);
 	return (0);
 }
 
-int		csp(char *str, t_args args, va_list ap)
+int		csp(char *str, t_args *args, va_list ap)
 {
 	int		i;
 	int		len;
@@ -113,65 +109,104 @@ int		csp(char *str, t_args args, va_list ap)
 
 	c = 0;
 	tmp = NULL;
-	(void)str;
 	j = 0;
 	i = 0;
-	if (args.flag == 'c')
+	if (args->flag == 'c')
 	{
 		len = 1;
 		c =  va_arg(ap,int);
-		if (args.padd != 0 && args.padd > len)
-			printpadd(args.padd, len);
-		ft_putchar((char)va_arg(ap, int));
-		if (args.less != 0)
-			printless(args.less, len);
+		if (args->padd != 0 && args->padd > len)
+			printpadd0(args->padd, len, (check02(str) == 1 ? '0' : ' '), args);
+		ft_putchar((char)c, args);
+		if (args->less != 0)
+			printless(args->less, len, args);
 	}
-	if (args.flag == 'p')
+	if (args->flag == 'p')
 	{
-		tmp = ft_printptr(va_arg(ap, void *));
-		len = strlen(tmp) + 2;
-		if (args.padd != 0 && args.padd > len)
-			printpadd(args.padd, len);
-		ft_putstr("0x");
-		ft_putstr(tmp);
-		if (args.less != 0)
-			printless(args.less, len);
+		tmp = ft_printptr(va_arg(ap, void *), args->preci, checkpreci(str));
+		len = ft_strlen(tmp) + 2;
+		if (args->padd != 0 && args->padd > len && check0(str) == 0)
+			printpadd(args->padd, len, args);
+		ft_putstr("0x", args);
+		while (args->preci > len - 2)
+		{
+		ft_putchar('0', args);
+		len++;
+		}
+		if (check0(str) == 1)
+			printpadd0(args->padd, len, '0', args);
+		ft_putstr(tmp, args);
+		if (args->less != 0)
+			printless(args->less, len, args);
 		free (tmp);
 	}
-	if (args.flag == 's')
+	if (args->flag == 's')
 	{
 		tmp = va_arg(ap, char*);
+		if (args->preci == 0 && checkpreci(str) == 1)
+			tmp = "";
 		len = ft_strlen(tmp);
-		if (args.preci <= len && args.preci != 0)
-			len = args.preci;
-		if (args.padd != 0 && args.padd > len)
-		 	printpadd(args.padd, len);
-		ft_putnstr(tmp, len);
-		if (args.less != 0)
-			printless(args.less, len);
+		if (args->preci <= len && args->preci != 0)
+			len = args->preci;
+		if (args->padd != 0 && args->padd > len)
+			printpadd0(args->padd, len,(check02(str) == 1 ? '0' : ' '), args);
+		ft_putnstr(tmp, len, args);
+		if (args->less != 0)
+			printless(args->less, len, args);
 	}
 	return (1);
 }
-/*
-int		diouxx(char *str, t_args args, va_list ap)
+
+int		check02(char *str)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] >= '1' && str[i] <= '9')
+			break;
+		if (str[i] == '0')
+			return (1);
+		i++;
 	}
-
+	return (0);
 }
 
-int		flotte(char *str, t_args args, va_list ap)
+int		invalid(char *str, t_args *args)
 {
-	int		i;
+	int	len;
 
-	i = 0;
-	while (str[i])
-	{
+	(void)str;
+	len = 1;
+	if (args->padd != 0 && args->padd > len)
+		printpadd0(args->padd, len,(check02(str) == 1 ? '0' : ' '), args);
+	ft_putchar(args->flag, args);
+	if (args->less != 0)
+		printless(args->less, len, args);
+	return (1);
+}
 
-	}
+/*
+   int		diouxx(char *str, t_args args, va_list ap)
+   {
+   int		i;
 
-}*/
+   i = 0;
+   while (str[i])
+   {
+   }
+
+   }
+
+   int		flotte(char *str, t_args args, va_list ap)
+   {
+   int		i;
+
+   i = 0;
+   while (str[i])
+   {
+
+   }
+
+   }*/

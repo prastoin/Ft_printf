@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 09:48:44 by ochaar            #+#    #+#             */
-/*   Updated: 2018/11/08 14:01:52 by ochaar           ###   ########.fr       */
+/*   Created: 2018/11/07 17:27:20 by ochaar            #+#    #+#             */
+/*   Updated: 2018/12/05 09:46:01 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <unistd.h>
+#include "ft_printf.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_putstr(char const *s, t_args *args)
 {
-	size_t	i;
-	char	*cpys;
+	int i;
 
 	i = 0;
-	cpys = (char *)s;
-	while (i < n)
+	while (s[i])
 	{
-		cpys[i] = '\0';
+		ft_putchar(s[i], args);
 		i++;
 	}
 }
